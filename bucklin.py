@@ -19,12 +19,20 @@ votes=[make_vote(1,8,  ["D","C","B","A"],7),
 
 election=Election(votes)
 election.set_all(value=False)
-def animate(cat_i):
+def animate(i):
     ax=reset_fig()
-    election.set_column(cat_i,value=True)
+    if(i=="win"):
+        ax.text(7, 6, r'Winner: C', fontsize=24)
+        election.show(ax)
+        election.set_all(False)
+        return
+    if(type(i)==int):
+        election.set_column(i,value=True)
+    if(type(i)==str):
+        election.show_winer(i)	
     election.show(ax)
 
-anim=animation.FuncAnimation(fig,animate,frames=[-1,-2,-3,-4],
+anim=animation.FuncAnimation(fig,animate,frames=[-1,"A",-2,"C","win"],
 	                        interval=2000)
 anim.save("bucklin.gif",writer="imagemagick")
 plt.show()

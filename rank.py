@@ -20,6 +20,13 @@ class Election(object):
         for vote_i in self.votes:
             vote_i.prefs[i].set_color(value)
 
+    def show_winer(self,cat_i):
+        for pref_i in self.prefs:
+            if(pref_i.color=='green'):
+                pref_i.set_color(True)
+            if(pref_i.is_active() and pref_i.name==cat_i):
+                pref_i.set_color('green')
+
     def show(self,ax):
         for vote_i in self.votes:
             vote_i.show(ax)	
@@ -45,6 +52,9 @@ class Pref(object):
     def show(self,ax):
         ax.text(self.x,self.y, self.name, fontsize=14,
             bbox={'facecolor':self.color, 'alpha': 0.5, 'pad': 10})
+
+    def is_active(self):
+        return (self.color=='#0099FF')
 
     def set_color(self,color):
         if(type(color)==str):
