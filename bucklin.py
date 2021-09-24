@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt 
 import matplotlib.animation as animation
-#from matplotlib.collections import PatchCollection
 from rank import Election,make_vote
 
 fig = plt.figure()
@@ -19,16 +18,13 @@ votes=[make_vote(1,8,  ["D","C","B","A"],7),
        make_vote(1,0.5,["A","B","C","D"],-0.5)]
 
 election=Election(votes)
+election.set_all(value=False)
 def animate(cat_i):
-    ax=reset_fig()	
-    if(cat_i=="win"):
-        ax.text(7, 6, r'Winner: D', fontsize=24)
-    else:	
-        election.set_category(cat_i)
+    ax=reset_fig()
+    election.set_column(cat_i,value=True)
     election.show(ax)
 
-anim=animation.FuncAnimation(fig,animate,frames=["A","B","C","win"],
+anim=animation.FuncAnimation(fig,animate,frames=[-1,-2,-3,-4],
 	                        interval=2000)
-anim.save("test.gif",writer="imagemagick")
-
+anim.save("bucklin.gif",writer="imagemagick")
 plt.show()
