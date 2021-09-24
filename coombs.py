@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt 
 import matplotlib.animation as animation
-#from matplotlib.collections import PatchCollection
+import rank
 from rank import Election,make_vote
 
 fig = plt.figure()
@@ -27,8 +27,10 @@ def animate(cat_i):
         election.set_category(cat_i)
     election.show(ax)
 
-anim=animation.FuncAnimation(fig,animate,frames=["A","B","C","win"],
-	                        interval=2000)
-anim.save("test.gif",writer="imagemagick")
+frames=["A","B","C","win"]
+rank.to_dir(animate,frames,"coombs")
+#anim=animation.FuncAnimation(fig,animate,frames,
+#	                        interval=2000)
+#anim.save("test.gif",writer="imagemagick")
 
-plt.show()
+#plt.show()

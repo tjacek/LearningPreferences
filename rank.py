@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt 
+import os,os.path
 
 class Election(object):
     def __init__(self,votes):
@@ -69,3 +70,10 @@ def make_vote(x,y,names,t):
     prefs=[ Pref(x+1.5*i,y,name_i) 
              for i,name_i in enumerate( names)] 
     return Vote(prefs,t)
+
+def to_dir(animate,args,out_path):
+    if(not os.path.isdir(out_path)):
+        os.mkdir(out_path)
+    for i,arg_i in enumerate(args):
+        animate(arg_i)
+        plt.savefig("%s/%d" % (out_path,i),format="png")

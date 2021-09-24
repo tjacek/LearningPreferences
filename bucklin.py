@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt 
 import matplotlib.animation as animation
+import rank
 from rank import Election,make_vote
 
 fig = plt.figure()
@@ -32,7 +33,10 @@ def animate(i):
         election.show_winer(i)	
     election.show(ax)
 
-anim=animation.FuncAnimation(fig,animate,frames=[-1,"A",-2,"C","win"],
-	                        interval=2000)
-anim.save("bucklin.gif",writer="imagemagick")
-plt.show()
+
+frames=[-1,"A",-2,"C","win"]
+rank.to_dir(animate,frames,"bucklin")
+#anim=animation.FuncAnimation(fig,animate,frames,
+#	                        interval=2000)
+#anim.save("bucklin.gif",writer="imagemagick")
+#plt.show()
